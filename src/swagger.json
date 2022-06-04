@@ -1,0 +1,531 @@
+{
+  "swagger": "2.0",
+  "servers": [
+    {
+      "url": "https://cobertura-medica-backend.herokuapp.com/api",
+      "variables": {}
+    }
+  ],
+  "info": {
+    "title": "Obra social Backend",
+    "version": "1.0.0",
+    "description": "Backend de obra social\n API Endpoint: [https://cobertura-medica-backend.herokuapp.com//api](https://cobertura-medica-backend.herokuapp.com//api)"
+  },
+  "tags": [
+    {
+      "name": "Doctors",
+      "description": "Doctores"
+    },
+    {
+      "name": "Turnos",
+      "description": "Turnos"
+    },
+    {
+      "name": "Dias",
+      "description": "Dias"
+    },
+    {
+      "name": "Usuarios",
+      "description": "Usuarios"
+    }
+  ],
+  "paths": {
+    "/doctors": {
+      "summary": "Listar y administrar doctores",
+      "description": "Enpoint que permite tanto obtener como crear nuevos doctores",
+      "get": {
+        "tags": ["Doctors"],
+        "summary": "Lista de todos los usuarios",
+        "description": "Obtener una lista con todos los usuarios",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "specialty",
+            "in": "header",
+            "description": "Filtrar por especialidad",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Doctors"],
+        "summary": "Agregar un doctor",
+        "description": "Permite agregar un doctor",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Informacion del doctor",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/doctor"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/adminAccesToken"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/doctors/{id}": {
+      "summary": "Obtener el doctor con el id indicado",
+      "get": {
+        "tags": ["Doctors"],
+        "summary": "Obtener la informacion sobre el doctor con la id :id",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El id del doctor solicitado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/appointments": {
+      "summary": "Informacion sobre los turnos",
+      "get": {
+        "tags": ["Turnos"],
+        "summary": "Obtener turnos",
+        "description": "Obtener turnos coincidentes con los parametros",
+        "operationId": "",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/adminAccesToken"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Fecha del turno",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "moth",
+            "in": "query",
+            "description": "Mes del turno",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctor",
+            "in": "query",
+            "description": "Id del doctor con el que saco el turno",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Año del turno",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "client",
+            "in": "query",
+            "description": "Cliente del turno",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Turnos"],
+        "summary": "Crear nuevo turno",
+        "description": "Crear un nuevo turno para el usuario",
+        "operationId": "",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userAccesToken"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Infomacion del turno",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/appointments/{id}": {
+      "summary": "Informacion sobre los turnos",
+      "get": {
+        "tags": ["Turnos"],
+        "summary": "Obtener turno",
+        "description": "Obtener turno",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id del turno",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/secretaryAccesToken"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Turnos"],
+        "summary": "Borrar turno",
+        "description": "Borrar turno",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id del turno",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/propietaryAccesToken"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/days": {
+      "summary": "Informacion sobre los dias",
+      "get": {
+        "tags": ["Dias"],
+        "summary": "Obtener un dia de un doctor",
+        "description": "Obtener turno",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Fecha del dia",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/doctorId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/days/month": {
+      "summary": "Infomacion del mes",
+      "get": {
+        "tags": ["Dias"],
+        "summary": "Obtener informacion del mes",
+        "description": "Obtener informacin sobre los dias del mes",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "description": "Mes",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Año",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/doctorId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "summary": "Informacion sobre mi usuario",
+      "get": {
+        "tags": ["Usuarios"],
+        "summary": "Informacion sobre mi usuario",
+        "description": "Obtener informacion sobre mi usuario",
+        "operationId": "",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userAccesToken"
+          },
+          {
+            "name": "appointments",
+            "in": "query",
+            "description": "Se desea obtener los turnos",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/users/{username}": {
+      "summary": "Informacion sobre un usuario",
+      "get": {
+        "tags": ["Usuarios"],
+        "summary": "Informacion sobre un usuario",
+        "description": "Obtener informacion sobre un usuario",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "Usuario del que se desea obtener informacion",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/secretaryAccesToken"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/users": {
+      "summary": "Nuevo usuario",
+      "post": {
+        "tags": ["Usuarios"],
+        "summary": "Crear nuevo usuario",
+        "description": "Crear un nuevo usuario",
+        "operationId": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Informacion del usuario",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "summary": "Iniciar sesion",
+      "post": {
+        "tags": ["Usuarios"],
+        "summary": "Iniciar sesion",
+        "description": "Iniciar sesion",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Nombre de usuario",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "Contraseña",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "adminAccesToken": {
+        "name": "Token",
+        "in": "header",
+        "description": "Token de acceso (Usuario administrador)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "secretaryAccesToken": {
+        "name": "authorization",
+        "in": "header",
+        "description": "Token de acceso (Usuario secretaria)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "userAccesToken": {
+        "name": "authorization",
+        "in": "header",
+        "description": "Token de acceso (Usuario)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "propietaryAccesToken": {
+        "name": "authorization",
+        "in": "header",
+        "description": "Token de acceso (Usuario propietario del turno)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "doctorId": {
+        "name": "doctor",
+        "in": "query",
+        "description": "Id del doctor",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "doctor": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "specialty": {
+          "type": "string"
+        }
+      }
+    },
+    "appointment": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "hour": {
+          "type": "string"
+        },
+        "doctor": {
+          "type": "string"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
