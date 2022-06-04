@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => res.redirect('/api-docs'));
-app.use('/', swaggerUI.serve, swaggerUI.setup(JSON.parse(swaggerDocument)));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(JSON.parse(swaggerDocument)));
 app.use('/api/doctors', doctorsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/appointments', appointmentsRouter);
