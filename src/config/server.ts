@@ -6,6 +6,7 @@ import doctorsRouter from '../routes/doctors.routes';
 import usersRouter from '../routes/users.routes';
 import cors from 'cors';
 import { readFileSync } from 'fs';
+// import path from 'path'
 
 //Swagger
 import swaggerUI from 'swagger-ui-express';
@@ -18,12 +19,12 @@ app.set('PORT', process.env.PORT || 5001);
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => res.redirect('/api-docs'));
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(JSON.parse(swaggerDocument)));
+app.use('/', express.static(path.join(__dirname, '../../public')));
 app.use('/api/doctors', doctorsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/appointments', appointmentsRouter);
 app.use('/api/days', daysRouter);
+app.use('/api', swaggerUI.serve, swaggerUI.setup(JSON.parse(swaggerDocument)));
 
 app.use(handleErrors);
 

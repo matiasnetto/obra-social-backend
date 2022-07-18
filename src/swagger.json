@@ -1,17 +1,17 @@
 {
   "swagger": "2.0",
-  "host": "cobertura-medica-backend.herokuapp.com",
+  "host": "obra-social-app.herokuapp.com/api",
   "basePath": "/api",
   "servers": [
     {
-      "url": "https://cobertura-medica-backend.herokuapp.com/api",
+      "url": "https://obra-social-app.herokuapp.com/api/",
       "variables": {}
     }
   ],
   "info": {
     "title": "Obra social Backend",
     "version": "1.0.0",
-    "description": "Backend de obra social\n API Endpoint: [https://cobertura-medica-backend.herokuapp.com/api](https://cobertura-medica-backend.herokuapp.com/api)"
+    "description": "Backend de obra social\n API Endpoint: [https://obra-social-app.herokuapp.com/api/](https://obra-social-app.herokuapp.com/api/) \n APP url: [https://obra-social-app.herokuapp.com/](https://obra-social-app.herokuapp.com/)"
   },
   "tags": [
     {
