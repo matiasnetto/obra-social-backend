@@ -1,6 +1,6 @@
 {
   "swagger": "2.0",
-  "host": "obra-social-app.herokuapp.com/api",
+  "host": "obra-social-app.herokuapp.com",
   "basePath": "/api",
   "servers": [
     {
